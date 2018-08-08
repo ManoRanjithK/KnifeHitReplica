@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+#canvas{
+                display:block;
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+               transform: translate(-50%, -50%);
+                border:1px solid #000000;
+            }
+body
+{
+
+  background: #ADA996;
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+
+
+
+}
+#fire_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*Button Color*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 3px;
+}
+#fire_btn:active {/*on Click*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*Move down*/
+    border-bottom: none;/*disappears*/
+}
+#Knifes_rem{
+  font-weight: bold;
+  color:  black;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 30px;
+}
+#my_footer{
+  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 30px;
+  color: red;
+}
+#Level{
+  font-weight: bold;
+  color:  black;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 30px;
+}
+#tagger
+  {
+    font-weight: bold;
+    color:  black;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 30px;
+  }
