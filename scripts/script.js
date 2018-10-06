@@ -10,7 +10,7 @@ var startAngle = (2*Math.PI);
 var endAngle = (Math.PI*2);       //Welcome to my knife hit
 var currentAngle = 0;             //Level-1- Normal game
 var rectheight=Canvas.height-90;  //Level-2- Pre-fixed Knifes_rem
-var knife_moving=0;               // level-3-Inverse rotating target
+var knife_moving=0;               //level-3-Inverse rotating target
 var knifes_remaining=10;          //level-4-Mirroring target on knife hit
 var hit=0;                        //Further levels to be added
 var level=1;
@@ -30,7 +30,7 @@ function check_rect_collision(curarc)
         if(Math.abs(curarc.current_angle-hit_knifes[i].cangle)<0.15)
         {
         ctx.clearRect(0,0,Canvas.width/2,Canvas.height/2);
-        alert("Aww.. You lost your cool man !")
+        alert("Aww.. You lost your cool man! ")
         window.location.reload();
         }
       }
@@ -146,7 +146,7 @@ function Update(){
     //Clears
     ctx.clearRect(0,0,Canvas.width,Canvas.height);
     ctx.beginPath();
-    ctx.drawImage(knife,Canvas.width/2,rectheight,40,80);
+    ctx.drawImage(knife, Canvas.width / 2, rectheight, 25, 80); //new height and width
     ctx.fillStyle="red";
     var current_rec=
     {
@@ -171,7 +171,7 @@ function Update(){
       else
       ctx.rotate(hit_knifes[i].angle);
       ctx.fillStyle="red";
-      ctx.drawImage(knife,hit_knifes[i].x-Canvas.width/2,hit_knifes[i].y-200,40,80);
+      ctx.drawImage(knife, hit_knifes[i].x - Canvas.width / 2, hit_knifes[i].y - 200, 25, 80); //new height and width
       ctx.closePath();
       ctx.translate(-Canvas.width/2,-200);
       ctx.restore();
@@ -202,7 +202,7 @@ function Update(){
   }
   else
   {
-    alert("YOU COMPLETED THE LEVEL ! CONGRATUALTIONS");
+    alert("YOU COMPLETED THE LEVEL! CONGRATUALTIONS");
     if(level==4)
     {
       alert("Thank you for playing the game");
