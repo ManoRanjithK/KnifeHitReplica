@@ -5,7 +5,7 @@ var ctx = Canvas.getContext("2d");
 canvas.width=500;
 canvas.height=700;
 var knife= new Image();
-knife.src="knife.png";
+knife.src="assets/images/knife.png";
 var startAngle = (2*Math.PI);
 var endAngle = (Math.PI*2);       //Welcome to my knife hit
 var currentAngle = 0;             //Level-1- Normal game
@@ -16,6 +16,7 @@ var hit=0;                        //Further levels to be added
 var level=1;
 var flag=0;
 var hit_knifes=[];
+var collisionAudio = new Audio('assets/audio/collision.mp3');
 
 var raf = window.mozRequestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
@@ -29,11 +30,14 @@ function check_rect_collision(curarc)
       {
         if(Math.abs(curarc.current_angle-hit_knifes[i].cangle)<0.15)
         {
-        ctx.clearRect(0,0,Canvas.width/2,Canvas.height/2);
-        alert("Aww.. You lost your cool man! ")
-        window.location.reload();
+          ctx.clearRect(0,0,Canvas.width/2,Canvas.height/2);
+          collisionAudio.play();
+          window.location.reload();  
+          alert("Aww.. You lost your cool man! ")
+          return true;
         }
       }
+  return false;
     }
 
 
@@ -42,9 +46,12 @@ function check_collision(curarc,currec)
 if(currec.y-curarc.centerY<=curarc.radius)
 {
 //  alert("Hit");
+    if (!check_rect_collision(curarc)){
+      var hitAudio = new Audio('assets/audio/hit.mp3');
+      hitAudio.play();
+    }
   hit=1;
   //console.log(currec.y);
-  check_rect_collision(curarc);
   hit_knifes.push({
 			x:currec.x,
 			y:currec.y,
@@ -80,8 +87,8 @@ function Update(){
     hit_knifes.push({
         x:Canvas.width/2,
         y:295,
-        width:40,
-        height:80,
+        width:25,
+        height:85,
         r:100,
         angle:0,
         cangle:0
@@ -89,8 +96,8 @@ function Update(){
       hit_knifes.push({
             x:Canvas.width/2,
             y:295,
-            width:40,
-            height:80,
+            width:25,
+            height:85,
             r:100,
             angle:2.35,
             cangle:2.35
@@ -98,8 +105,8 @@ function Update(){
         hit_knifes.push({
                 x:Canvas.width/2,
                 y:295,
-                width:40,
-                height:80,
+                width:25,
+                height:85,
                 r:100,
                 angle:4.27,
                 cangle:4.27
@@ -146,14 +153,14 @@ function Update(){
     //Clears
     ctx.clearRect(0,0,Canvas.width,Canvas.height);
     ctx.beginPath();
-    ctx.drawImage(knife, Canvas.width / 2, rectheight, 25, 80); //new height and width
+    ctx.drawImage(knife, Canvas.width / 2, rectheight, 25, 85); //new width and height
     ctx.fillStyle="red";
     var current_rec=
     {
       "x":Canvas.width/2,
       "y":rectheight,
-      "width":40,
-      "height":80,
+      "width":25,
+      "height":85,
     }
     if(Object.keys(hit_knifes).length >0 )
     {
@@ -171,7 +178,7 @@ function Update(){
       else
       ctx.rotate(hit_knifes[i].angle);
       ctx.fillStyle="red";
-      ctx.drawImage(knife, hit_knifes[i].x - Canvas.width / 2, hit_knifes[i].y - 200, 25, 80); //new height and width
+      ctx.drawImage(knife, hit_knifes[i].x - Canvas.width / 2, hit_knifes[i].y - 200, 25, 85); //new width and height
       ctx.closePath();
       ctx.translate(-Canvas.width/2,-200);
       ctx.restore();
@@ -197,13 +204,12 @@ function Update(){
     //console.log(typeof(hit_knifes));
     document.getElementById("Level").innerHTML=level;
     var result=check_collision(current_arc,current_rec);
-
     raf(Update);
   }
   else
   {
     alert("YOU COMPLETED THE LEVEL! CONGRATUALTIONS");
-    if(level==4)
+    if(level==4) 
     {
       alert("Thank you for playing the game");
       window.location.reload();
